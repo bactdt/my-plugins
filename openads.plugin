@@ -1,0 +1,68 @@
+#!name = 杂项
+#!desc = 来源于广告必须out，自用
+#!homepage = https://t.me/Aa28413761
+#!icon = https://raw.githubusercontent.com/bactdt/tc/main/512x512bb.PNG
+#!author = 小白啊小白
+#!date = 2024-06-03
+[Rule]
+# > 交管12123
+DOMAIN-suffix, v3.fstats.xyz, reject
+DOMAIN-suffix, wss.haoyundmn.com, reject
+DOMAIN-suffix, new.xiongzhangad.com, reject
+DOMAIN-suffix, alexametrics.com, reject
+DOMAIN-keyword, in-page-push, reject
+# > 云闪付
+DOMAIN, ads.95516.com, reject
+DOMAIN, cm-10-138.getui.com, reject
+DOMAIN, sdk.open.talk.getui.net, reject
+DOMAIN, sdk-conf.getui.com, reject
+DOMAIN, switch.cup.com.cn, reject
+DOMAIN, tysdk.95516.com, reject
+[Rewrite] 
+# > 中国广电
+^https?:\/\/app\.10099\.com\.cn\/contact-web\/api\/version\/getFlashScreenPage url reject-200
+
+# > 中信银行
+# hostname = wap.bank.ecitic.com, imcs.citicbank.com
+^https?:\/\/wap.bank\.ecitic\.com:6443\/NMBFOServer\/cbframework\.do\?act=CUBEPAGEDATA url reject-200
+
+# > 开屏广告
+^https:\/\/imcs\.citicbank\.com\/cloud\/.+(1125.+2436|1242.+2688|750.+1638|563.+1218) url reject-dict
+
+# > 交管12123
+^https:\/\/gab\.122\.gov\.cn\/eapp\/m\/sysquery\/adver$ url reject
+^https:\/\/gab\.122\.gov\.cn\/eapp\/m\/sysquery url reject
+
+# > 航旅纵横
+^http?:\/\/(discardrp|startup)\.umetrip\.com\/gateway\/api\/umetrip\/native url reject
+^https?:\/\/.*umetrip\.com\.cn\/gateway\/api\/umetrip\/native$ url script-response-header https://gitlab.com/lodepuly/vpn_tool/-/raw/master/Resource/Script/Umetrip/Umetrip_remove_ads.js
+^https?:\/\/114\.115\.217\.129\/gateway\/api\/umetrip\/native$ url script-response-header https://gitlab.com/lodepuly/vpn_tool/-/raw/master/Resource/Script/Umetrip/Umetrip_remove_ads.js
+
+# > 中国银行
+^https:\/\/mbs\.boc\.cn\/ubas-mgateway-static\/images\/advertType\/.+.jpg url reject-200
+
+# > 工商银行
+^https?:\/\/v\.icbc\.com\.cn\/userfiles\/Resources\/WAP\/advertisement\/ url reject-200
+
+# > 富途牛牛
+# 我的横幅广告
+^https?:\/\/api\.futunn\.com\/v2\/optimus\/my-homepage-config url reject-dict
+# 账户和交易横幅广告
+^https:\/\/api\.futunn\.com\/v2\/config\/promote-config url reject-dict
+^https?:\/\/api\d\.futunn\.com\/ad\/ url reject
+^https?:\/\/api\.futunn\.com\/v\d\/ad\/ url reject
+# 首页右下角角标
+^https?:\/\/api\.futunn\.com\/treasure-chest\/box-data url reject
+
+# > 流利说
+^https?:\/\/rengine-platform\.llsapp\.com\/auth\/api\/remoteResource\/darwin url reject
+# > 55海淘
+^https:\/\/appv6\.55haitao\.com\/IflyAd\/getAd reject-dict
+# > 高佣联盟
+^https:\/\/dk\.gylm2020\.com\/gylm\/usercenter\/v1\/getstartpage\? reject-dict
+# > 挖煤机
+# hostname = appnew.meruki.cn,sitecn.mokaki.cn
+^https?://(sitecn\.meruki\.cn|appnew\.meruki\.cn)/\?n=Sig\.Front\.AppFront\.GetOpenAd&(.*)$
+
+[Mitm]
+hostname = app.10099.com.cn,pv.elife.icbc.com.cn,discardrp.umetrip.com,v.icbc.com.cn,api*.futunn.com,startup.umetrip.com,gab.122.gov.cn,mbs.boc.cn,tcmobileapi.17usoft.com,wap.bank.ecitic.com,imcs.citicbank.com,appv6.55haitao.com,dk.gylm2020.com,appnew.meruki.cn,sitecn.mokaki.cn
