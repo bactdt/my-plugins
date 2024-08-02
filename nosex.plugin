@@ -4,7 +4,9 @@
 #!icon = https://cdn.jsdelivr.net/gh/bactdt/tc/new/202408021646022.png
 #!author = batct
 #!date = 2024-08-02
+
 [Rule]
+
 # > missav
 DOMAIN-suffix,missav.com, reject
 # > pronhub
