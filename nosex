@@ -1,0 +1,14 @@
+#!name = 禁止瑟瑟
+#!desc = 关爱健康，从我做起
+#!homepage = https://t.me/Aa28413761
+#!icon = https://cdn.jsdelivr.net/gh/bactdt/tc/new/202408021646022.png
+#!author = batct
+#!date = 2024-08-02
+# > missav
+DOMAIN-suffix,missav.com, reject
+# > pronhub
+DOMAIN-suffix,pornhub.com,reject
+# > jable.tv
+DOMAIN-suffix,jable.tv,reject
+# > xvideos
+DOMAIN-suffix,xvideos.com,reject
