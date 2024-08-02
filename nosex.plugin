@@ -8,10 +8,10 @@
 [Rule]
 
 # > missav
-DOMAIN-suffix,missav.com, reject
+DOMAIN-suffix,missav.com, REJECT
 # > pronhub
-DOMAIN-suffix,pornhub.com,reject
+DOMAIN-suffix,pornhub.com,REJECT
 # > jable.tv
-DOMAIN-suffix,jable.tv,reject
+DOMAIN-suffix,jable.tv,REJECT
 # > xvideos
-DOMAIN-suffix,xvideos.com,reject
+DOMAIN-suffix,xvideos.com,REJECT
