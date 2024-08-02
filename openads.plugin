@@ -6,18 +6,18 @@
 #!date = 2024-08-02
 [Rule]
 # > 交管12123
-DOMAIN-suffix, v3.fstats.xyz, reject
-DOMAIN-suffix, wss.haoyundmn.com, reject
-DOMAIN-suffix, new.xiongzhangad.com, reject
-DOMAIN-suffix, alexametrics.com, reject
-DOMAIN-keyword, in-page-push, reject
+DOMAIN-suffix, v3.fstats.xyz, REJECT
+DOMAIN-suffix, wss.haoyundmn.com, REJECT
+DOMAIN-suffix, new.xiongzhangad.com, REJECT
+DOMAIN-suffix, alexametrics.com, REJECT
+DOMAIN-keyword, in-page-push, REJECT
 # > 云闪付
-DOMAIN, ads.95516.com, reject
-DOMAIN, cm-10-138.getui.com, reject
-DOMAIN, sdk.open.talk.getui.net, reject
-DOMAIN, sdk-conf.getui.com, reject
-DOMAIN, switch.cup.com.cn, reject
-DOMAIN, tysdk.95516.com, reject
+DOMAIN, ads.95516.com, REJECT
+DOMAIN, cm-10-138.getui.com, REJECT
+DOMAIN, sdk.open.talk.getui.net, REJECT
+DOMAIN, sdk-conf.getui.com, REJECT
+DOMAIN, switch.cup.com.cn, REJECT
+DOMAIN, tysdk.95516.com, REJECT
 [Rewrite] 
 # > 中国广电
 ^https?:\/\/app\.10099\.com\.cn\/contact-web\/api\/version\/getFlashScreenPage url reject-200
