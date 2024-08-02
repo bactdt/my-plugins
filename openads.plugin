@@ -3,7 +3,7 @@
 #!homepage = https://t.me/Aa28413761
 #!icon = https://raw.githubusercontent.com/bactdt/tc/main/512x512bb.PNG
 #!author = 小白啊小白
-#!date = 2024-06-03
+#!date = 2024-08-02
 [Rule]
 # > 交管12123
 DOMAIN-suffix, v3.fstats.xyz, reject
@@ -35,9 +35,6 @@ DOMAIN, tysdk.95516.com, reject
 
 # > 航旅纵横
 ^http?:\/\/(discardrp|startup)\.umetrip\.com\/gateway\/api\/umetrip\/native url reject
-http-response ^https?:\/\/.*umetrip\.com\.cn\/gateway\/api\/umetrip\/native$ script-path=https://gitlab.com/lodepuly/vpn_tool/-/raw/master/Resource/Script/Umetrip/Umetrip_remove_ads.js
-http-response ^https?:\/\/114\.115\.217\.129\/gateway\/api\/umetrip\/native$ script-path=https://gitlab.com/lodepuly/vpn_tool/-/raw/master/Resource/Script/Umetrip/Umetrip_remove_ads.js
-
 # > 中国银行
 ^https:\/\/mbs\.boc\.cn\/ubas-mgateway-static\/images\/advertType\/.+.jpg url reject-200
 
@@ -63,6 +60,8 @@ http-response ^https?:\/\/114\.115\.217\.129\/gateway\/api\/umetrip\/native$ scr
 # > 挖煤机
 # hostname = appnew.meruki.cn,sitecn.mokaki.cn
 ^https?://(sitecn\.meruki\.cn|appnew\.meruki\.cn)/\?n=Sig\.Front\.AppFront\.GetOpenAd&(.*)$
-
+[script]
+http-response ^https?:\/\/.*umetrip\.com\.cn\/gateway\/api\/umetrip\/native$ script-path=https://gitlab.com/lodepuly/vpn_tool/-/raw/master/Resource/Script/Umetrip/Umetrip_remove_ads.js
+http-response ^https?:\/\/114\.115\.217\.129\/gateway\/api\/umetrip\/native$ script-path=https://gitlab.com/lodepuly/vpn_tool/-/raw/master/Resource/Script/Umetrip/Umetrip_remove_ads.js
 [Mitm]
 hostname = app.10099.com.cn,pv.elife.icbc.com.cn,discardrp.umetrip.com,v.icbc.com.cn,api*.futunn.com,startup.umetrip.com,gab.122.gov.cn,mbs.boc.cn,tcmobileapi.17usoft.com,wap.bank.ecitic.com,imcs.citicbank.com,appv6.55haitao.com,dk.gylm2020.com,appnew.meruki.cn,sitecn.mokaki.cn
