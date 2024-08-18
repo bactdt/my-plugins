@@ -54,12 +54,12 @@ DOMAIN, tysdk.95516.com, REJECT
 # > 流利说
 ^https?:\/\/rengine-platform\.llsapp\.com\/auth\/api\/remoteResource\/darwin url reject
 # > 55海淘
-^https:\/\/appv6\.55haitao\.com\/IflyAd\/getAd reject-dict
+^https:\/\/appv6\.55haitao\.com\/IflyAd\/getAd url reject-dict
 # > 高佣联盟
-^https:\/\/dk\.gylm2020\.com\/gylm\/usercenter\/v1\/getstartpage\? reject-dict
+^https:\/\/dk\.gylm2020\.com\/gylm\/usercenter\/v1\/getstartpage\? url reject-dict
 # > 挖煤机
 # hostname = appnew.meruki.cn,sitecn.mokaki.cn
-^https?://(sitecn\.meruki\.cn|appnew\.meruki\.cn)/\?n=Sig\.Front\.AppFront\.GetOpenAd&(.*)$
+^https?://(sitecn\.meruki\.cn|appnew\.meruki\.cn)/\?n=Sig\.Front\.AppFront\.GetOpenAd&(.*)$ url reject
 [script]
 http-response ^https?:\/\/.*umetrip\.com\.cn\/gateway\/api\/umetrip\/native$ script-path=https://gitlab.com/lodepuly/vpn_tool/-/raw/master/Resource/Script/Umetrip/Umetrip_remove_ads.js,tag=航旅纵横
 http-response ^https?:\/\/114\.115\.217\.129\/gateway\/api\/umetrip\/native$ script-path=https://gitlab.com/lodepuly/vpn_tool/-/raw/master/Resource/Script/Umetrip/Umetrip_remove_ads.js,tag=航旅纵横
