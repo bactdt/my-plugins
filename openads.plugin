@@ -3,7 +3,7 @@
 #!homepage = https://t.me/Aa28413761
 #!icon = https://raw.githubusercontent.com/bactdt/tc/main/512x512bb.PNG
 #!author = 小白啊小白
-#!date = 2024-08-02
+#!date = 2024-08-18
 [Rule]
 # > 交管12123
 DOMAIN-suffix, v3.fstats.xyz, REJECT
@@ -59,7 +59,7 @@ DOMAIN, tysdk.95516.com, REJECT
 ^https:\/\/dk\.gylm2020\.com\/gylm\/usercenter\/v1\/getstartpage\? url reject-dict
 # > 挖煤机
 # hostname = appnew.meruki.cn,sitecn.mokaki.cn
-^https?://(sitecn\.meruki\.cn|appnew\.meruki\.cn)/\?n=Sig\.Front\.AppFront\.GetOpenAd&(.*)$ url reject
+^https?://(sitecn\.meruki\.cn|appnew\.meruki\.cn)/\?n=Sig\.Front\.AppFront\.GetOpenAd&(.*)$ url reject-dict
 [script]
 http-response ^https?:\/\/.*umetrip\.com\.cn\/gateway\/api\/umetrip\/native$ script-path=https://gitlab.com/lodepuly/vpn_tool/-/raw/master/Resource/Script/Umetrip/Umetrip_remove_ads.js,tag=航旅纵横
 http-response ^https?:\/\/114\.115\.217\.129\/gateway\/api\/umetrip\/native$ script-path=https://gitlab.com/lodepuly/vpn_tool/-/raw/master/Resource/Script/Umetrip/Umetrip_remove_ads.js,tag=航旅纵横
