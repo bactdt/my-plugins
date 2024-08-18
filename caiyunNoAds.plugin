@@ -1,0 +1,33 @@
+#!name = 彩云天气
+#!homepage = https://github.com/ddgksf2013
+#!author = ddgksf2013
+#!date = 2024-08-18
+
+
+
+[Mitm]
+hostname = wrapper.cyapi.cn, api.caiyunapp.com, starplucker.cyapi.cn, ad.cyapi.cn, biz.cyapi.cn
+
+
+[script]
+# > 图层推广@ddgksf2013
+http-response ^https?:\/\/wrapper\.cyapi\.cn\/v\d\/activity script-path=https://github.com/ddgksf2013/Scripts/raw/master/caiyun_json.js
+# > 活动推广@ddgksf2013
+http-response ^https?:\/\/api\.caiyunapp\.com\/v\d\/activity script-path=https://github.com/ddgksf2013/Scripts/raw/master/caiyun_json.js
+# > 首页顶部推广@ddgksf2013
+http-response ^https?:\/\/starplucker\.cyapi\.cn\/v\d/operation/homefeatures script-path=https://github.com/ddgksf2013/Scripts/raw/master/caiyun_json.js
+# > SVIP提醒推广@ddgksf2013
+http-response ^https?:\/\/starplucker\.cyapi\.cn\/v\d/notification/message_center script-path=https://github.com/ddgksf2013/Scripts/raw/master/caiyun_json.js
+# > 雨季特惠提醒@ddgksf2013
+http-response ^https?:\/\/starplucker\.cyapi\.cn\/v\d/config/cypage script-path=https://github.com/ddgksf2013/Scripts/raw/master/caiyun_json.js
+# > 发现页信息流推荐@ddgksf2013
+http-response ^https?:\/\/starplucker\.cyapi\.cn\/v\d/operation/feeds script-path=https://github.com/ddgksf2013/Scripts/raw/master/caiyun_json.js
+# > 发现页banners@ddgksf2013
+http-response ^https?:\/\/starplucker\.cyapi\.cn\/v\d/operation/banners script-path=https://github.com/ddgksf2013/Scripts/raw/master/caiyun_json.js
+# > 发现页中间部分@ddgksf2013
+http-response ^https?:\/\/starplucker\.cyapi\.cn\/v\d/operation/features script-path=https://github.com/ddgksf2013/Scripts/raw/master/caiyun_json.js
+# > 发现页活动@ddgksf2013
+http-response ^https?:\/\/starplucker\.cyapi\.cn\/v\d/campaigns script-path=https://github.com/ddgksf2013/Scripts/raw/master/caiyun_json.js
+[Rewrite] 
+# > 通用广告请求@ddgksf2013
+^https?:\/\/ad\.cyapi\.cn\/v\d url reject-200
