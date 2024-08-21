@@ -1,7 +1,6 @@
 import re
 import os
 import sys
-import glob
 
 def convert_conf_to_plugin(conf_content):
     lines = conf_content.strip().split('\n')
@@ -67,43 +66,20 @@ def convert_conf_to_plugin(conf_content):
     return '\n'.join(plugin_content)
 
 def read_conf_file(file_path):
-    try:
-        with open(file_path, 'r', encoding='utf-8') as file:
-            return file.read()
-    except FileNotFoundError:
-        print(f"错误: 文件 {file_path} 未找到")
-        return None
-    except IOError as e:
-        print(f"错误: 读取文件 {file_path} 时发生 IO 错误 - {e}")
-        return None
+    with open(file_path, 'r', encoding='utf-8') as file:
+        return file.read()
 
 def save_plugin_file(content, output_path):
-    try:
-        with open(output_path, 'w', encoding='utf-8') as file:
-            file.write(content)
-    except IOError as e:
-        print(f"错误: 写入文件 {output_path} 时发生 IO 错误 - {e}")
+    with open(output_path, 'w', encoding='utf-8') as file:
+        file.write(content)
 
-def process_conf_files(input_directory, output_directory):
-    os.makedirs(output_directory, exist_ok=True)
-    conf_files = glob.glob(os.path.join(input_directory, '*.conf'))
-    
-    for conf_file in conf_files:
-        plugin_file = os.path.join(output_directory, os.path.basename(conf_file).replace('.conf', '.plugin'))
-        conf_content = read_conf_file(conf_file)
-        if conf_content is not None:
-            plugin_content = convert_conf_to_plugin(conf_content)
-            save_plugin_file(plugin_content, plugin_file)
-            print(f"转换成功！插件文件已保存到: {plugin_file}")
-
-def main():
-    if len(sys.argv) < 3:
-        print("用法: python convert_conf_to_plugin.py <输入目录> <输出目录>")
-        sys.exit(1)
-
-    input_directory = sys.argv[1]
-    output_directory = sys.argv[2]
-    process_conf_files(input_directory, output_directory)
+def main(input_path, output_path):
+    conf_content = read_conf_file(input_path)
+    plugin_content = convert_conf_to_plugin(conf_content)
+    save_plugin_file(plugin_content, output_path)
+    print(f"转换成功！插件文件已保存到: {output_path}")
 
 if __name__ == "__main__":
-    main()
+    input_path = sys.argv[1]
+    output_path = sys.argv[2] if len(sys.argv) > 2 else "output.plugin"
+    main(input_path, output_path)
