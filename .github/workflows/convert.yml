@@ -1,4 +1,4 @@
-name: Convert .conf to .plugin
+name: Convert Conf to Plugin
 
 on:
   push:
@@ -9,29 +9,28 @@ on:
       - main
 
 jobs:
-  convert:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+    - name: Checkout code
+      uses: actions/checkout@v3
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.x'
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
 
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          # Install any additional dependencies here, if needed
+    - name: Install dependencies
+      run: pip install -r requirements.txt  # 如果有额外依赖，可在requirements.txt中指定
 
-      - name: Run Python script
-        run: |
-          python convert_conf_to_plugin.py
-          
-      - name: Upload .plugin file
-        uses: actions/upload-artifact@v3
-        with:
-          name: converted-plugin
-          path: plugin/example.plugin
+    - name: Convert .conf to .plugin
+      run: python convert_conf_to_plugin.py conf/example.conf plugin/example.plugin
+
+    - name: Commit and push the result
+      run: |
+        git config --global user.name 'github-actions[bot]'
+        git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+        git add plugin/example.plugin
+        git commit -m "Convert .conf to .plugin"
+        git push
