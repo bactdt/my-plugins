@@ -21,14 +21,18 @@ jobs:
       with:
         python-version: '3.x'
 
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
 
     - name: Convert .conf to .plugin
-      run: python convert_conf_to_plugin.py conf/example.conf plugin/example.plugin
+      run: python convert_conf_to_plugin.py
 
     - name: Commit and push the result
       run: |
         git config --global user.name 'github-actions[bot]'
         git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-        git add plugin/example.plugin
+        git add plugin/
         git commit -m "Convert .conf to .plugin"
         git push
