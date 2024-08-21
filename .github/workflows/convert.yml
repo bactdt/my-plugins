@@ -22,7 +22,7 @@ jobs:
         python-version: '3.x'
 
     - name: Convert .conf to .plugin
-      run: python convert_conf_to_plugin.py
+      run: python convert_conf_to_plugin.py conf plugin
 
     - name: Commit and push the result
       run: |
