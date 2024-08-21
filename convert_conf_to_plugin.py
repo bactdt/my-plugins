@@ -1,86 +1,85 @@
 import re
 import os
+import sys
 
 def convert_conf_to_plugin(conf_content):
     lines = conf_content.strip().split('\n')
-    metadata = {}
-    rules = {'rewrite': [], 'script': [], 'mitm': []}
+    plugin_content = []
 
-    # Patterns for parsing metadata
-    metadata_patterns = {
-        'name': re.compile(r'^\s*@ScriptName\s*(.*)'),
-        'desc': re.compile(r'^\s*@Function\s*(.*)'),
-        'author': re.compile(r'^\s*@Author\s*(.*)'),
-        'homepage': re.compile(r'^\s*@ScriptURL\s*(.*)')
+    patterns = {
+        'metadata': {
+            'name': r'^\s*#!name\s*=\s*(.*)',
+            'desc': r'^\s*#!desc\s*=\s*(.*)',
+            'author': r'^\s*#!author\s*=\s*(.*)',
+            'homepage': r'^\s*#!homepage\s*=\s*(.*)',
+            'icon': r'^\s*#!icon\s*=\s*(.*)',
+            'input': r'^\s*#!input\s*=\s*(.*)',
+            'select': r'^\s*#!select\s*=\s*(.*)',
+            'system': r'^\s*#!system\s*=\s*(.*)',
+            'system_version': r'^\s*#!system_version\s*=\s*(.*)',
+            'loon_version': r'^\s*#!loon_version\s*=\s*(.*)',
+            'tag': r'^\s*#!tag\s*=\s*(.*)',
+        },
+        'sections': {
+            'argument': r'^\[Argument\]',
+            'general': r'^\[General\]',
+            'rule': r'^\[rule\]',
+            'rewrite': r'^\[rewrite\]',
+            'host': r'^\[host\]',
+            'script': r'^\[script\]',
+            'mitm': r'^\[mitm\]'
+        }
     }
 
-    # Patterns for parsing rules
-    rule_patterns = {
-        'rewrite': re.compile(r'^#\s*>\s*(.*)'),
-        'script': re.compile(r'^#\s*>\s*(.*)'),
-        'mitm': re.compile(r'^hostname\s*=\s*(.*)')
+    current_section = None
+    section_content = {
+        'argument': [],
+        'general': [],
+        'rule': [],
+        'rewrite': [],
+        'host': [],
+        'script': [],
+        'mitm': []
     }
 
-    # Parse metadata
     for line in lines:
-        for key, pattern in metadata_patterns.items():
-            match = pattern.search(line)
+        for key, pattern in patterns['metadata'].items():
+            match = re.match(pattern, line)
             if match:
-                metadata[key] = match.group(1).strip()
+                plugin_content.append(f'#!{key} = {match.group(1).strip()}')
                 break
 
-    # Parse rules
-    section = None
-    for line in lines:
-        if line.strip().startswith('# >'):
-            if '屏蔽' in line or '拒绝' in line:
-                section = 'rewrite'
-            elif '去推广' in line or '净化' in line:
-                section = 'script'
-            else:
-                section = 'mitm'
-            rules[section].append(line.split(' ', 2)[-1])
-        elif line.strip().startswith('hostname='):
-            rules['mitm'].extend(line.split('=')[1].split(', '))
+        for section, pattern in patterns['sections'].items():
+            if re.match(pattern, line, re.IGNORECASE):
+                current_section = section
+                break
 
-    # Generate plugin file content
-    plugin_content = []
-    if metadata.get("name"):
-        plugin_content.append(f'#!name = {metadata.get("name", "未知插件")}')
-    if metadata.get("desc"):
-        plugin_content.append(f'#!desc = {metadata.get("desc", "无描述")}')
-    if metadata.get("author"):
-        plugin_content.append(f'#!author = {metadata.get("author", "未知作者")}')
-    if metadata.get("homepage"):
-        plugin_content.append(f'#!homepage = {metadata.get("homepage", "无主页")}')
-    
-    if rules['rewrite']:
-        plugin_content.append('\n[Rewrite]')
-        plugin_content.extend(rules['rewrite'])
-    
-    if rules['script']:
-        plugin_content.append('\n[Script]')
-        plugin_content.extend(rules['script'])
-    
-    if rules['mitm']:
-        plugin_content.append('\n[Mitm]')
-        plugin_content.append(f'hostname = {", ".join(rules["mitm"])}')
+        if current_section and current_section in section_content:
+            if not line.startswith("#!") and line.strip():
+                section_content[current_section].append(line.strip())
 
-    # Ensure plugin directory exists
-    if not os.path.exists('plugin'):
-        os.makedirs('plugin')
+    for section, content in section_content.items():
+        if content:
+            plugin_content.append(f'\n[{section.capitalize()}]')
+            plugin_content.extend(content)
 
-    # Save to .plugin file in the plugin folder
-    plugin_file_path = 'plugin/example.plugin'
-    with open(plugin_file_path, 'w') as file:
-        file.write('\n'.join(plugin_content))
+    return '\n'.join(plugin_content)
+
+def read_conf_file(file_path):
+    with open(file_path, 'r', encoding='utf-8') as file:
+        return file.read()
+
+def save_plugin_file(content, output_path):
+    with open(output_path, 'w', encoding='utf-8') as file:
+        file.write(content)
+
+def main(input_path, output_path):
+    conf_content = read_conf_file(input_path)
+    plugin_content = convert_conf_to_plugin(conf_content)
+    save_plugin_file(plugin_content, output_path)
+    print(f"转换成功！插件文件已保存到: {output_path}")
 
 if __name__ == "__main__":
-    # Read .conf file from the conf folder
-    conf_file_path = 'conf/example.conf'
-    if os.path.exists(conf_file_path):
-        with open(conf_file_path, 'r') as file:
-            conf_content = file.read()
-        convert_conf_to_plugin(conf_content)
-    else:
-        print(f"{conf_file_path} not found.")
+    input_path = sys.argv[1]
+    output_path = sys.argv[2] if len(sys.argv) > 2 else "output.plugin"
+    main(input_path, output_path)
