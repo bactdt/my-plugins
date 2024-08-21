@@ -1,6 +1,6 @@
 import re
-import os
 import sys
+import os
 
 def convert_conf_to_plugin(conf_content):
     lines = conf_content.strip().split('\n')
@@ -80,6 +80,9 @@ def main(input_path, output_path):
     print(f"转换成功！插件文件已保存到: {output_path}")
 
 if __name__ == "__main__":
+    if len(sys.argv) != 3:
+        print("用法: python convert_conf_to_plugin.py <input_file> <output_file>")
+        sys.exit(1)
     input_path = sys.argv[1]
-    output_path = sys.argv[2] if len(sys.argv) > 2 else "output.plugin"
+    output_path = sys.argv[2]
     main(input_path, output_path)
