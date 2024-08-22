@@ -87,4 +87,9 @@ def convert_all_conf_files(conf_dir, plugin_dir):
             conf_content = read_conf_file(conf_path)
             plugin_content = convert_conf_to_plugin(conf_content)
             save_plugin_file(plugin_content, plugin_path)
-            print(f"Conversion successful:
+            print(f"Conversion successful: {conf_file} -> {plugin_path}")
+
+if __name__ == "__main__":
+    conf_dir = 'conf'  # 配置文件所在目录
+    plugin_dir = 'plugin'  # 插件文件输出目录
+    convert_all_conf_files(conf_dir, plugin_dir)
