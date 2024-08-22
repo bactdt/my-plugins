@@ -90,3 +90,9 @@ if __name__ == "__main__":
     conf_dir = 'conf'  # 配置文件所在目录
     plugin_dir = 'plugin'  # 插件文件输出目录
     convert_all_conf_files(conf_dir, plugin_dir)
+def save_plugin_file(content, output_path):
+    with open(output_path, 'w', encoding='utf-8') as file:
+        file.write(content)
+    # Debug: 打印出生成的内容
+    print(f"Generated content for {output_path}:\n{content}\n")
+
