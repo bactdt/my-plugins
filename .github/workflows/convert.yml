@@ -2,7 +2,7 @@ name: Convert Conf to Plugin
 
 on:
   schedule:
-    - cron:  '0 8 * * *'  # 每天早上8点运行
+    - cron:  '0 0 8 * * *'  # 每天早上8点运行
   workflow_dispatch:  # 手动触发工作流
 
 jobs:
@@ -21,10 +21,5 @@ jobs:
     - name: Convert all .conf files to .plugin
       run: python convert_conf_to_plugin.py
 
-    - name: Commit and push the result
-      run: |
-        git config --global user.name 'github-actions[bot]'
-        git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-        git add plugin/
-        git commit -m "Daily conversion of .conf to .plugin"
-        git push
+    - name: List generated plugin files
+      run: ls -R plugin
