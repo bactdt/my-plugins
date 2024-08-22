@@ -1,12 +1,9 @@
 name: Convert Conf to Plugin
 
 on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+  schedule:
+    - cron:  '0 0 8 * * *'  # 每天早上8点运行
+  workflow_dispatch:  # 手动触发工作流
 
 jobs:
   build:
@@ -19,21 +16,15 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.x'  # 使用最新的 Python 版本
+        python-version: '3.x'
 
-
-    - name: Convert .conf files to .plugin
-      run: |
-        for conf_file in conf/*.conf; do
-          plugin_file="plugin/$(basename "${conf_file%.*}.plugin")"
-          python convert_conf_to_plugin.py "$conf_file" "$plugin_file"
-        done
+    - name: Convert all .conf files to .plugin
+      run: python convert_conf_to_plugin.py
 
     - name: Commit and push the result
       run: |
         git config --global user.name 'github-actions[bot]'
         git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-        git status  # 检查是否有更改
         git add plugin/
-        git commit -m "Convert .conf files to .plugin" || echo "No changes to commit"
+        git commit -m "Daily conversion of .conf to .plugin"
         git push
