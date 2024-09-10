@@ -1,0 +1,16 @@
+#!name = tt
+#!desc = 某电话卡的规则
+#!homepage = null
+#!author = 小白啊小白
+#!date = 2024-09-10
+
+[Rule]
+IP-CIDR,205.164.56.29/32,no-resolve
+IP-CIDR,154.17.22.195/32,no-resolve
+IP-CIDR,69.46.75.85/32/32,no-resolve
+IP-CIDR,205.164.56.27/32,no-resolve
+IP-CIDR,205.164.56.30/32,no-resolve
+IP-CIDR,205.164.56.28/32,no-resolve
+IP-CIDR,69.46.75.83/32,no-resolve
+IP-CIDR,205.164.56.26/32,no-resolve
+DOMAIN-SUFFIX,tktn.be
