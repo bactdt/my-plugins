@@ -1,0 +1,5 @@
+# 超星学习通
+DOMAIN,appswh.chaoxing.com,REJECT
+
+DOMAIN,home-yd.chaoxing.com,REJECT
+#DOMAIN,notice.chaoxing.com,REJECT
