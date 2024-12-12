@@ -61,7 +61,7 @@ DOMAIN, tysdk.95516.com, REJECT
 # hostname = appnew.meruki.cn,sitecn.mokaki.cn
 ^https?://(sitecn\.meruki\.cn|appnew\.meruki\.cn)/\?n=Sig\.Front\.AppFront\.GetOpenAd&(.*)$ url reject-dict
 [script]
-http-response ^https?:\/\/.*umetrip\.com\.cn\/gateway\/api\/umetrip\/native$ script-path=https://gitlab.com/lodepuly/vpn_tool/-/raw/master/Resource/Script/Umetrip/Umetrip_remove_ads.js,tag=航旅纵横
-http-response ^https?:\/\/114\.115\.217\.129\/gateway\/api\/umetrip\/native$ script-path=https://gitlab.com/lodepuly/vpn_tool/-/raw/master/Resource/Script/Umetrip/Umetrip_remove_ads.js,tag=航旅纵横
+#http-response ^https?:\/\/.*umetrip\.com\.cn\/gateway\/api\/umetrip\/native$ script-path=https://gitlab.com/lodepuly/vpn_tool/-/raw/master/Resource/Script/Umetrip/Umetrip_remove_ads.js,tag=航旅纵横
+#http-response ^https?:\/\/114\.115\.217\.129\/gateway\/api\/umetrip\/native$ script-path=https://gitlab.com/lodepuly/vpn_tool/-/raw/master/Resource/Script/Umetrip/Umetrip_remove_ads.js,tag=航旅纵横
 [Mitm]
 hostname = app.10099.com.cn,pv.elife.icbc.com.cn,discardrp.umetrip.com,v.icbc.com.cn,api*.futunn.com,startup.umetrip.com,gab.122.gov.cn,mbs.boc.cn,tcmobileapi.17usoft.com,wap.bank.ecitic.com,imcs.citicbank.com,appv6.55haitao.com,dk.gylm2020.com,appnew.meruki.cn,sitecn.mokaki.cn
